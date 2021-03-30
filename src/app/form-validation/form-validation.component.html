@@ -1,0 +1,141 @@
+<div layout="column" layout-fill>
+    <div align="center" layout="row" layout-align="center center">
+  
+      <mat-card class="info-card mat-elevation-z8" flex="80" style="margin-top: 60px;width: 800px;;">
+  
+        <mat-card-title></mat-card-title>
+        <mat-card-subtitle>
+        </mat-card-subtitle>
+  
+        <mat-card-content fxLayout="column" fxLayoutAlign="stretch" >
+          
+          <form (ngSubmit)="onSubmit()" fxLayout="column" fxLayoutAlign="start stretch" #formClient="ngForm">
+  
+            <div fxFlex="100"  fxLayout="row" fxLayoutAlign="space-between  start">
+              <mat-form-field fxFlex="45" >  
+                <input matInput type="text" class="form-control" value="" placeholder="First Name"
+                  name="firstName" #firstnameField ='ngModel' [(ngModel)]="client.firstname" required minlength="4">
+                  <mat-error *ngIf="firstnameField.errors?.required">
+                    <p>  Please enter your name </p>
+                  </mat-error>
+                  <mat-error *ngIf="firstnameField.errors?.minlength">
+                    <p>  first name must be 4 or more characters </p>
+                  </mat-error>
+              </mat-form-field> 
+  
+              <mat-form-field fxFlex="45">
+                <input matInput type="text" class="form-control" value="" placeholder="Last Name" 
+                  name="lastName" required minlength="3" #lastnameField='ngModel'  [(ngModel)]="client.lastname" >
+                
+                  <mat-error *ngIf="lastnameField.errors?.required">
+                    <p>  Please enter your last name </p>
+                  </mat-error>
+                  <mat-error *ngIf="lastnameField.errors?.minlength">
+                    <p>  last name must be 3 or more characters </p>
+                  </mat-error>
+                </mat-form-field>
+          
+            </div>
+  
+            <div fxFlex="100"  fxLayout="row" fxLayoutAlign="space-between  start">
+  
+              <mat-form-field fxFlex="25">
+                <input matInput [matDatepicker]="dtbirth" placeholder="Date of Birth"
+                  name="birth" required #birthday='ngModel' [(ngModel)]="client.birth"  >
+                <mat-datepicker-toggle matSuffix [for]="dtbirth"></mat-datepicker-toggle>
+                <mat-datepicker #dtbirth></mat-datepicker>
+                <mat-error *ngIf="birthday.errors?.required">
+                    <p>Please enter your birthday</p>
+                </mat-error>
+              </mat-form-field>
+  
+              <mat-form-field fxFlex="50">
+                <input matInput placeholder="Enter your email" type="email" 
+                  name="email"  [(ngModel)]="client.email" #email required email>
+                  <mat-error *ngIf="email.errors?.required">
+                    <p>Please enter your email</p>
+                  </mat-error>
+                  <mat-error *ngIf="email.errors?.email">
+                    <p>Please enter a valid email</p>
+                  </mat-error>
+              </mat-form-field>
+  
+              <mat-form-field fxFlex="20">
+                <input matInput placeholder="Age" type="number"
+                  name="age"  [(ngModel)]="client.age" #age="ngModel" required min="1">
+                  <mat-error *ngIf="age.errors?.required">
+                      <p>Enter a valid age</p>
+                  </mat-error>
+              </mat-form-field>
+    
+            </div>          
+  
+            <div fxFlex="100" fxLayoutAlign="start">
+                <h4>Address:</h4>
+            </div>
+            <div fxFlex="100"  fxLayout="row" fxLayoutAlign="space-between start">
+              <mat-form-field fxFlex="40" >  
+                <input matInput type="text" class="form-control" value="" placeholder="Street" 
+                  name="street" #street='ngModel' required [(ngModel)]="client.street"  >
+                  <mat-error *ngIf="street.errors?.required">
+                    <p>Enter a valid street</p>
+                </mat-error>
+              </mat-form-field> 
+              <mat-form-field fxFlex="30">
+                <input matInput type="text" class="form-control" value="" placeholder="City" 
+                  name="city"  [(ngModel)]="client.city" #city="ngModel" required>
+                  <mat-error *ngIf="city.errors?.required">
+                    <p>Enter a valid city</p>
+                </mat-error>
+              </mat-form-field>
+   
+              <mat-form-field fxFlex="20">
+                <mat-select placeholder="State" #state='ngModel' required 
+                  name="state"  [(ngModel)]="client.state" >
+  
+                  <mat-option *ngFor="let s of [ 'SP', 'PR', 'SC', 'RS', 'PA', 'RO']" [value]="s">
+                    {{s}}
+                  </mat-option>
+                </mat-select>
+                <mat-error *ngIf="state.errors?.required">
+                    <p>Enter a valid state</p>
+                </mat-error>
+              </mat-form-field>
+            </div>
+  
+            <div fxFlex="100" fxLayoutAlign="start">
+              <h4>Telephones: </h4>
+            </div> 
+  
+            <div fxFlex="100"  fxLayout="row wrap" fxLayoutAlign="space-between start" fxLayoutGap="20px">
+              <mat-form-field fxFlex="45" >
+                <input matInput type="text" class="form-control" value="" placeholder="Telephone 1 " 
+                  name="phone1"  [(ngModel)]="client.phone1" #phone1="ngModel"required >
+                  <mat-error *ngIf="phone1.errors?.required">
+                    <p>Enter a valid phone</p>
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field fxFlex="45" >  
+                <input matInput type="text" #phone2 required class="form-control" value="" placeholder="Telephone 2"
+                  name="phone2"  [(ngModel)]="client.phone2" >
+                  <mat-error *ngIf="phone2.errors?.required">
+                    <p>Enter a valid city</p>
+                </mat-error>
+              </mat-form-field>
+            </div>
+  
+            <button [disabled]="formClient.invalid" mat-button color="primary" type="submit"  >
+              <mat-icon>done</mat-icon>Submit
+            </button>
+            
+          </form>
+  
+        </mat-card-content>
+        <mat-card-footer>
+        </mat-card-footer>
+      </mat-card>
+  
+  
+    </div>
+  </div>
+      
